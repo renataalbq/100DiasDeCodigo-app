@@ -20,15 +20,18 @@ interface ProfileInfoProps {
 export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
   const [openInput, setOpenInput] = React.useState(false);
   const [newTag, setNewTag] = React.useState('');
-  const [tags, setTags] = React.useState(['#frontend', '#mobile']);
+  const [tags, setTags] = React.useState(['frontend', 'mobile']);
 
   const onAddTag = () => {
       setOpenInput(true)
   }
 
   const onSaveTag = () => {
+    if (newTag) {
+      setTags([...tags, newTag]);
+      setNewTag('');
+    }
     setOpenInput(false);
-    setNewTag('');
   }
 
   const onRemoveTag = (tagToRemove: string) => {
@@ -37,8 +40,8 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
   }
 
   return (
-    <View style={{backgroundColor: '#0d0d0df8',  }}>
-      <ContainerRow style={{ marginHorizontal: 20}}>
+    <View style={{backgroundColor: '#0d0d0df8'}}>
+      <ContainerRow style={{ marginHorizontal: 10}}>
         <ProfileImage
           source={{ uri: props.profilePicture }}
           style={{ marginTop: 10}}
@@ -50,8 +53,8 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
         </View>
       </ContainerRow>
 
-      <Container style={{ paddingHorizontal: 10, paddingTop: 20, marginHorizontal: 20}}>
-          <View  style={{ flexDirection: 'row', gap: 10 }}>
+      <Container style={{ paddingHorizontal: 10, paddingTop: 20, marginHorizontal: 10}}>
+          <View  style={{ flexDirection: 'row', gap: 10,  flexWrap: 'wrap' }}>
           {tags.map(tag => (
             <Badge
               key={tag}
@@ -59,6 +62,9 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
               onRemove={openInput ? () => onRemoveTag(tag) : undefined}
             />
           ))}
+          {openInput && newTag && (
+            <Badge text={newTag} onRemove={() => setNewTag('')} />
+          )}
           </View>
          {!openInput ? (
             <TouchableOpacity style={{padding: 12, 
@@ -73,26 +79,26 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
          
       </Container>
       {!openInput ? (
-        <Container style={{ paddingHorizontal: 10, marginTop: 7}}>
+        <Container style={{ paddingHorizontal: 10, marginTop: 7,  marginHorizontal: 10}}>
           <View>
             <View  style={{flexDirection: 'row', gap: 240}}>
               <WhiteText style={{ marginTop: 15, marginBottom: 8, fontSize: 16, fontWeight: 'bold' }}>Progresso</WhiteText>
               <WhiteText style={{ marginTop: 15, marginBottom: 7, fontSize: 14}}>{props.currentDay}/100</WhiteText>
             </View>
                 
-            <View style={{marginBottom: 10}}>
+            <View style={{marginBottom: 10,}}>
               <ProgressBar progress={props.progress} />
             </View>
           </View>
 
           <View style={{flexDirection: 'row', gap: 20, marginTop: 10}}>
             <View style={{flexDirection: 'row', gap: 10}}>
-              <AntDesign name="heart" size={18}  color={'#b6b6b6'} />
+              <AntDesign name="heart" size={16}  color={'#b6b6b6'} />
               <WhiteText style={{ marginBottom: 10, paddingTop:1, fontSize: 14 }}>{props.numberOfLikes}</WhiteText>
             </View>
             <View style={{flexDirection: 'row', gap: 10}}>
-              <FontAwesome name="comments" size={18} color={'#b6b6b6'} />
-              <Text style={{ color: '#ffffff', marginBottom: 10, paddingTop:1, fontSize: 14 }}>{props.numberOfComments}</Text>
+              <FontAwesome name="comments" size={16} color={'#b6b6b6'} />
+              <Text style={{ color: '#ffffff', marginBottom: 10, fontSize: 14}}>{props.numberOfComments}</Text>
             </View>
           </View>
         </Container>
@@ -107,6 +113,7 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
                 onChangeText={setNewTag}
                 placeholderTextColor={'rgba(134, 134, 134, 1)'}
                 style={{
+                  color: 'white',
                   borderWidth: 1,
                   borderRadius: 8,
                   padding: 10,
