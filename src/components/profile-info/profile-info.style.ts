@@ -8,12 +8,20 @@ export const WhiteText = styled.Text`
   color:#fff;
 `;
 
-export const Username = styled.Text`
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: -3px;
+export const Name = styled.Text`
+  font-size:  24px;
+  font-weight: 700;
+  margin-top: 10px;
   color: #fff;
 `;
+
+export const Username = styled.Text`
+  font-size:  16px;
+  font-weight: 600;
+  margin-top: 15px;
+  color: gray;
+`;
+
 
 export const ContainerRow = styled.View`
   flex: 1;

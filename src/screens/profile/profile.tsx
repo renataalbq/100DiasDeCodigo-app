@@ -62,21 +62,32 @@ export const Profile = () => {
           style={{zIndex: 3, marginTop: 60, paddingTop: 35}}>
          
           <Container style={{borderBottomEndRadius: 20}}>
-              <ProfileInfo profilePicture={PROFILE_PICTURE} name={'Renata'} username={'renatinhadev'} progress={progress} />
+              <ProfileInfo 
+                profilePicture={PROFILE_PICTURE} 
+                name={'Renata'} 
+                username={'renatinhadev'} 
+                progress={progress}
+                numberOfLikes={20} 
+                numberOfComments={5}
+                currentDay={20} />
+
               <LinearGradient
              colors={['#0d0d0df8', '#772bf1']}>
+
             <WhiteText style={{ paddingVertical: 20, paddingLeft: 10, fontWeight: 'bold', fontSize: 16}}>Seu Progresso</WhiteText>
+
             <View style={{marginRight: 20}}>
-            {mockData.map((item, index) => (
-                <Tweet id={item.id} 
-                content={item.content} 
-                createdAt={item.createdAt} 
-                name={item.name} username={item.username}
-                numberOfComments={2}
-                numberOfLikes={20}
-                numberOfRetweets={0}
-                impressions={20} />
-            ))}
+              {mockData.map((item, index) => (
+                  <Tweet id={item.id} 
+                  content={item.content} 
+                  createdAt={item.createdAt} 
+                  name={item.name} 
+                  username={item.username}
+                  numberOfComments={2}
+                  numberOfLikes={20}
+                  numberOfRetweets={0}
+                  impressions={20} />
+              ))}
             </View>
             </LinearGradient>
 
