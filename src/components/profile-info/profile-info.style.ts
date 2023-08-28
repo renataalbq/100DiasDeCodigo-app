@@ -18,7 +18,6 @@ export const Name = styled.Text`
 export const Username = styled.Text`
   font-size:  16px;
   font-weight: 600;
-  margin-top: 15px;
   color: gray;
 `;
 

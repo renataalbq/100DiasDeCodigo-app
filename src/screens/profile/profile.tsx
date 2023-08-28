@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react';
 import {
   Animated,
+  Image,
   ImageBackground,
+  ScrollView,
   Text,
   TouchableOpacity,
   View,
@@ -11,6 +13,7 @@ import { mockData } from '../timeline/timeline';
 import { Container, ContainerRelative, WhiteText } from './profile.style';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ProfileInfo } from '../../components/profile-info/profile-info';
+import { Tweet2 } from '../../components/tweet/tweet-figma';
 
 const PROFILE_PICTURE =
   'https://pbs.twimg.com/profile_images/1695191319096803328/LRSwLlVg_400x400.jpg';
@@ -28,40 +31,9 @@ export const Profile = () => {
 
   return (
     <Container>
-      <ContainerRelative>
-      <AnimatedImageBackground
-        source={{
-          uri: PROFILE_BANNER,
-        }}
-        style={{
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          height: 35 + 60,
-          transform: [
-            {
-              scale: scrollY.interpolate({
-                inputRange: [-200, 0],
-                outputRange: [5, 1],
-                extrapolateLeft: 'extend',
-                extrapolateRight: 'clamp',
-              }),
-            },
-          ],
-        }}
-      >
-      </AnimatedImageBackground>
-      </ContainerRelative>
-      
-        <Animated.ScrollView
-          showsVerticalScrollIndicator={false}
-          onScroll={Animated.event(
-            [{nativeEvent: { contentOffset: { y: scrollY }}}],
-            { useNativeDriver: true }
-          )}
-          style={{zIndex: 3, marginTop: 60, paddingTop: 35}}>
-         
-          <Container style={{borderBottomEndRadius: 20}}>
+        <ScrollView>
+          <Image source={{ uri: PROFILE_BANNER }}  style={{ height: 100, width: '100%' }} />
+             <Container>
               <ProfileInfo 
                 profilePicture={PROFILE_PICTURE} 
                 name={'Renata'} 
@@ -71,10 +43,9 @@ export const Profile = () => {
                 numberOfComments={5}
                 currentDay={20} />
 
-              <LinearGradient
-             colors={['#0d0d0df8', '#772bf1']}>
+              <LinearGradient colors={['rgba(13, 13, 13, 1)', 'rgba(36, 0, 93, 0.708)', '#393939f8']}>
 
-            <WhiteText style={{ paddingVertical: 20, paddingLeft: 10, fontWeight: 'bold', fontSize: 16}}>Seu Progresso</WhiteText>
+              <WhiteText style={{ paddingVertical: 20, paddingLeft: 10, fontWeight: 'bold', fontSize: 16}}>Seu Progresso</WhiteText>
 
             <View style={{marginRight: 20}}>
               {mockData.map((item, index) => (
@@ -83,17 +54,16 @@ export const Profile = () => {
                   createdAt={item.createdAt} 
                   name={item.name} 
                   username={item.username}
-                  numberOfComments={2}
-                  numberOfLikes={20}
-                  numberOfRetweets={0}
-                  impressions={20} />
+                  replies_count={2}
+                  likes_count={20}
+                  views_count={20} />
               ))}
             </View>
             </LinearGradient>
 
         </Container>
-      </Animated.ScrollView>
-      
+      </ScrollView>
+
     </Container>
   );
 }

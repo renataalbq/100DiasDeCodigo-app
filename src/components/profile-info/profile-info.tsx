@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Container, ContainerRow, Name, Username, WhiteText } from './profile-info.style';
 import { AntDesign } from '@expo/vector-icons'
 import { FontAwesome } from '@expo/vector-icons';
@@ -18,9 +18,27 @@ interface ProfileInfoProps {
 }
 
 export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
+  const [openInput, setOpenInput] = React.useState(false);
+  const [newTag, setNewTag] = React.useState('');
+  const [tags, setTags] = React.useState(['#frontend', '#mobile']);
+
+  const onAddTag = () => {
+      setOpenInput(true)
+  }
+
+  const onSaveTag = () => {
+    setOpenInput(false);
+    setNewTag('');
+  }
+
+  const onRemoveTag = (tagToRemove: string) => {
+    const updatedTags = tags.filter(tag => tag !== tagToRemove);
+    setTags(updatedTags);
+  }
+
   return (
-    <View style={{backgroundColor: '#0d0d0df8' }}>
-      <ContainerRow>
+    <View style={{backgroundColor: '#0d0d0df8',  }}>
+      <ContainerRow style={{ marginHorizontal: 20}}>
         <ProfileImage
           source={{ uri: props.profilePicture }}
           style={{ marginTop: 10}}
@@ -32,39 +50,83 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
         </View>
       </ContainerRow>
 
-      <Container style={{ paddingHorizontal: 10, paddingTop: 20}}>
+      <Container style={{ paddingHorizontal: 10, paddingTop: 20, marginHorizontal: 20}}>
           <View  style={{ flexDirection: 'row', gap: 10 }}>
-            <Badge text={'#frontend'} />
-            <Badge text={'#mobile'} />
+          {tags.map(tag => (
+            <Badge
+              key={tag}
+              text={tag}
+              onRemove={openInput ? () => onRemoveTag(tag) : undefined}
+            />
+          ))}
           </View>
-          <TouchableOpacity style={{padding: 12, width: '100%', marginTop: 20, borderRadius: 8, borderWidth: 1, borderColor: '#782BF1'}}>
-            <WhiteText style={{textAlign: 'center', fontSize: 16,}}>Adicionar tag</WhiteText>
-          </TouchableOpacity>
+         {!openInput ? (
+            <TouchableOpacity style={{padding: 12, 
+              width: '100%', 
+              marginTop: 20, 
+              borderRadius: 8, borderWidth: 1, 
+              borderColor: '#782BF1',
+              }} onPress={onAddTag}>
+              <WhiteText style={{textAlign: 'center', fontSize: 16,}}>Adicionar tag</WhiteText>
+            </TouchableOpacity>
+         ) : null}
+         
       </Container>
+      {!openInput ? (
+        <Container style={{ paddingHorizontal: 10, marginTop: 7}}>
+          <View>
+            <View  style={{flexDirection: 'row', gap: 240}}>
+              <WhiteText style={{ marginTop: 15, marginBottom: 8, fontSize: 16, fontWeight: 'bold' }}>Progresso</WhiteText>
+              <WhiteText style={{ marginTop: 15, marginBottom: 7, fontSize: 14}}>{props.currentDay}/100</WhiteText>
+            </View>
+                
+            <View style={{marginBottom: 10}}>
+              <ProgressBar progress={props.progress} />
+            </View>
+          </View>
 
-      <Container style={{ paddingHorizontal: 10, marginTop: 7}}>
-        <View>
-          <View  style={{flexDirection: 'row', gap: 240}}>
-            <WhiteText style={{ marginTop: 15, marginBottom: 8, fontSize: 16, fontWeight: 'bold' }}>Progresso</WhiteText>
-            <WhiteText style={{ marginTop: 15, marginBottom: 7, fontSize: 14}}>{props.currentDay}/100</WhiteText>
+          <View style={{flexDirection: 'row', gap: 20, marginTop: 10}}>
+            <View style={{flexDirection: 'row', gap: 10}}>
+              <AntDesign name="heart" size={18}  color={'#b6b6b6'} />
+              <WhiteText style={{ marginBottom: 10, paddingTop:1, fontSize: 14 }}>{props.numberOfLikes}</WhiteText>
+            </View>
+            <View style={{flexDirection: 'row', gap: 10}}>
+              <FontAwesome name="comments" size={18} color={'#b6b6b6'} />
+              <Text style={{ color: '#ffffff', marginBottom: 10, paddingTop:1, fontSize: 14 }}>{props.numberOfComments}</Text>
+            </View>
           </View>
-               
-          <View style={{marginBottom: 10}}>
-            <ProgressBar progress={props.progress} />
-          </View>
-        </View>
+        </Container>
+        ) : (
+          <View style={{ marginTop: 20}}>
+            <Container style={{ marginHorizontal: 20, marginBottom: 20,}}>
+              <WhiteText style={{ marginTop: 15, marginBottom: 8, fontSize: 16, fontWeight: 'bold' }}>Adicionar tag</WhiteText>
 
-        <View style={{flexDirection: 'row', gap: 20, marginTop: 10}}>
-          <View style={{flexDirection: 'row', gap: 10}}>
-            <AntDesign name="heart" size={18}  color={'#b6b6b6'} />
-            <WhiteText style={{ marginBottom: 10, paddingTop:1, fontSize: 14 }}>{props.numberOfLikes}</WhiteText>
+              <TextInput
+                placeholder="Backend"
+                value={newTag}
+                onChangeText={setNewTag}
+                placeholderTextColor={'rgba(134, 134, 134, 1)'}
+                style={{
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  padding: 10,
+                  backgroundColor: '#292929fd'
+                }}
+              />
+              <TouchableOpacity
+                onPress={onSaveTag}
+                style={{
+                  backgroundColor: '#782BF1',
+                  paddingVertical: 12,
+                  borderRadius: 8,
+                  marginVertical: 20,
+                }}
+              >
+                <WhiteText style={{ textAlign: 'center', fontSize: 16 }}>Salvar</WhiteText>
+              </TouchableOpacity>
+            </Container>
           </View>
-          <View style={{flexDirection: 'row', gap: 10}}>
-            <FontAwesome name="comments" size={18} color={'#b6b6b6'} />
-            <Text style={{ color: '#080808', marginBottom: 10, paddingTop:1, fontSize: 14 }}>{props.numberOfComments}</Text>
-          </View>
-        </View>
-      </Container>
+        )}
     </View>
     );
 }
