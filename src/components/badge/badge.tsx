@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { BadgeStyled, BadgeText } from './badge.style';
 
-
 interface BadgeProps {
   text: string;
 }
