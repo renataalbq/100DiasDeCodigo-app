@@ -3,19 +3,16 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
     width: 100%;
     border-radius: 6px;
-    overflow: hidden;
-    flex-direction: row;
     padding: 10px;
     border-bottom-width: 1px;
-    background-color: #181818;
+    background-color: rgba(21, 21, 21, 0.85);
     margin-left: 10px;
     margin-bottom: 10px;
 `;
 
 export const MainContainer = styled.View`
-    margin-left: 10px;
+    margin-left: 60px;
     margin-right: 20px;
-    flex: 1;
 `;
 
 export const Name = styled.Text`
@@ -29,9 +26,6 @@ export const Username = styled.Text`
 `;
 
 export const Content = styled.Text`
-    margin-top: 5px;
-    line-height: 20px;
-    margin-bottom: 5px;
     color: #FFF;
 `;
 
@@ -50,7 +44,6 @@ export const Avatar = styled.Image`
 
 export const Footer = styled.View`
     flex-direction: row;
-    margin-left: 5px;
     margin-right: 5px;
     gap: 10px;
     padding-top: 8px;
