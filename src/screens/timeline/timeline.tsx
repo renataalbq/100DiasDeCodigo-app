@@ -10,7 +10,7 @@ export const mockData = [
     {id: '3', name: 'Renata', username: 'renatinhadev', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia cursus elit, ', createdAt: '01/02', numberOfComments: 2, numberOfRetweets: 2, numberOfLikes: 2, impressions: 2},
     {id: '4', name: 'Renata', username: 'renatinhadev', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia cursus elit, ', createdAt: '01/02', numberOfComments: 2, numberOfRetweets: 2, numberOfLikes: 2, impressions: 2},
     {id: '5', name: 'Renata', username: 'renatinhadev', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia cursus elit, ', createdAt: '01/02', numberOfComments: 2, numberOfRetweets: 2, numberOfLikes: 2, impressions: 2},
-    {id: '6', name: 'Renata', username: 'renatinhadev', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia cursus elit, ', createdAt: '01/02', numberOfComments: 2, numberOfRetweets: 2, numberOfLikes: 2, impressions: 2},
+{id: '6', name: 'Renata', username: 'renatinhadev', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia cursus elit, ', createdAt: '01/02', numberOfComments: 2, numberOfRetweets: 2, numberOfLikes: 2, impressions: 2},
     {id: '7', name: 'Renata', username: 'renatinhadev', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia cursus elit, ', createdAt: '01/02', numberOfComments: 2, numberOfRetweets: 2, numberOfLikes: 2, impressions: 2},
     {id: '8', name: 'Renata', username: 'renatinhadev', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia cursus elit, ', createdAt: '01/02', numberOfComments: 2, numberOfRetweets: 2, numberOfLikes: 2, impressions: 2},
 ]
@@ -27,10 +27,9 @@ export const Timeline = () => {
             image={item.image}
             name={item.name} 
             username={item.username}
-            numberOfComments={item.numberOfComments}
-            numberOfRetweets={item.numberOfRetweets}
-            numberOfLikes={item.numberOfLikes}
-            impressions={item.impressions} 
+            replies_count={item.numberOfComments}
+            likes_count={item.numberOfLikes}
+            views_count={item.impressions} 
         />} />
       </Container>
     );
