@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { TextInput, View } from 'react-native';
 import { Container, ContainerRow, Name, Username, WhiteText } from './profile-info.style';
 import { AntDesign } from '@expo/vector-icons'
 import { FontAwesome } from '@expo/vector-icons';
-import { ProfileImage } from '../../screens/profile/profile.style';
 import { Badge } from '../badge/badge';
 import { ProgressBar } from '../progress-bar/progress-bar';
 import { useNavigation } from '@react-navigation/native';
@@ -46,7 +45,7 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
   return (
     <View style={{backgroundColor: '#0d0d0df8'}}>
       <ContainerRow style={{ marginHorizontal: 10}}>
-        <View style={{ marginTop: 10}}>
+        <View style={{ marginTop: 16, marginLeft: 10}}>
           <Avatar url={props.profilePicture} size={'profile'} />
         </View>
         <View style={{marginLeft: 20}}>
@@ -71,12 +70,14 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
           )}
           </View>
           {!openInput ? (
-           <Button.PrimaryOutlined onTap={onAddTag} text='Adicionar tag'/>
+            <View style={{marginTop: 14}}>
+              <Button.PrimaryOutlined onTap={onAddTag} text='Adicionar tag'/>
+            </View>
        ) : null}
        
       </Container>
       {!openInput ? (
-        <Container style={{ paddingHorizontal: 10, marginTop: 7,  marginHorizontal: 10}}>
+        <Container style={{ paddingHorizontal: 10, marginTop: 4,  marginHorizontal: 10}}>
           <View>
             <View  style={{flexDirection: 'row', gap: 230}}>
               <WhiteText style={{ marginTop: 15, marginBottom: 8, fontSize: 16, fontWeight: 'bold' }}>Progresso</WhiteText>
@@ -102,7 +103,7 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
         ) : (
           <View style={{ marginTop: 20}}>
             <Container style={{ marginHorizontal: 20, marginBottom: 20,}}>
-              <WhiteText style={{ marginTop: 15, marginBottom: 8, fontSize: 16, fontWeight: 'bold' }}>Adicionar tag</WhiteText>
+              <WhiteText style={{ marginTop: 15, marginBottom: 8, marginLeft: 3, fontSize: 16, fontWeight: 'bold' }}>Adicionar tag</WhiteText>
 
               <TextInput
                 placeholder="Backend"

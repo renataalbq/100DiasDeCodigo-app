@@ -15,9 +15,8 @@ export function TabRoutes() {
         tabBarActiveTintColor: 'white',
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
-          backgroundColor: '#01010a'
+          backgroundColor: '#01010a',
         },
-        unmountOnBlur: true,
       }}
     >
       <Tab.Screen

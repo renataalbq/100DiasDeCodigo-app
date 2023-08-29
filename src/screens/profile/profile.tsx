@@ -37,14 +37,14 @@ export const Profile = () => {
                 currentDay={20} />
 
               <Background>
-                <View style={{backgroundColor: overlay}}>
-                <WhiteText style={{ paddingVertical: 20, paddingLeft: 10, fontWeight: 'bold', fontSize: 16}}>Seu Progresso</WhiteText>
+                <View style={{backgroundColor: overlay, marginHorizontal: 10}}>
+                <WhiteText style={{ paddingVertical: 20, fontWeight: 'bold', fontSize: 16}}>Seu Progresso</WhiteText>
 
                   {mockData.map((item, index) => (
-                      <Tweet id={item.id} 
+                      <Tweet id={index.toString()} 
                       content={item.content}
-                      image={'https://pbs.twimg.com/profile_images/1695191319096803328/LRSwLlVg_400x400.jpg'}
-                      createdAt={item.createdAt} 
+                      avatar={'https://pbs.twimg.com/profile_images/1695191319096803328/LRSwLlVg_400x400.jpg'}
+                      tweeted_at={item.createdAt} 
                       name={item.name} 
                       username={item.username}
                       replies_count={2}

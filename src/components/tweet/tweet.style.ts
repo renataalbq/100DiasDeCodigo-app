@@ -38,15 +38,8 @@ export const ImageContent = styled.Image`
     border-radius: 15px;
 `;
 
-export const Avatar = styled.Image`
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
-`;
-
 export const Footer = styled.View`
     flex-direction: row;
-    margin-right: 5px;
     gap: 10px;
-    padding-top: 8px;
+    padding-top: 14px;
 `;

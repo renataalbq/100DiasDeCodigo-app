@@ -7,8 +7,9 @@ import { Avatar } from '../avatar/avatar';
 type TweetProps = {
     id: string;
     content: string;
-    createdAt: string;
+    tweeted_at: string;
     image?: string;
+    avatar: string;
     replies_count?: number;
     likes_count?: number;
     views_count?: number;
@@ -19,13 +20,15 @@ type TweetProps = {
 export const Tweet = (props: TweetProps) => {
     return (
       <Container>
-        <View style={{flexDirection: 'row', gap: 20}}>
-          <Avatar size='card' url={props.image ? props.image : ''} />
-          <View style={{ flexDirection: 'row', paddingTop: 5 }}>
+        <View style={{flexDirection: 'row', gap: 17}}>
+          <View style={{paddingLeft: 7, paddingTop: 7}}>
+            <Avatar size='card' url={props.avatar ? props.avatar : ''} />
+          </View>
+          <View style={{ flexDirection: 'row', paddingTop: 10 }}>
               <Name>{props.name}</Name>
               <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
                 <Username>{props.username} </Username>
-                <Username>·  {props.createdAt}</Username>
+                <Username>·  {props.tweeted_at}</Username>
               </View>
             </View>
           </View>
@@ -36,9 +39,8 @@ export const Tweet = (props: TweetProps) => {
               <Footer>
                 <FooterTweet icon="comment" text={props.replies_count} />
                 <FooterTweet icon="heart" text={props.likes_count} />
-                
               </Footer>
-              <View style={{paddingTop: 8}}>
+              <View style={{paddingTop: 14}}>
                 <FooterTweet icon="chart" text={props.views_count || 0} />
               </View>
             </View>
