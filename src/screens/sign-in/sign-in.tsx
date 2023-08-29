@@ -1,13 +1,14 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Background } from '../../components/background/background';
+import Button from '../../components/button/button';
 
 export const SignIn = () => {
+    const navigation = useNavigation();
+
     return (
-    <View>
-        <TouchableOpacity>
-            <Text>Entrar com twitter</Text>
-        </TouchableOpacity>
-    </View>
+        <Background>
+            <Button.Primary text='Entrar com o twitter' />
+        </Background>
     );
 }
