@@ -1,4 +1,3 @@
-import { Animated } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -21,8 +20,6 @@ export const TweetsText = styled.View`
   padding-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;
-  border-top-width: 1px;
-  border-top-color: rgba(255, 255, 255, 0.25);
 `;
 
 export const ContainerRelative = styled.View`
@@ -33,7 +30,7 @@ export const ContainerRow = styled.View`
   flex: 1;
   flex-direction: row;
 `
-export const ProfileImage = styled(Animated.Image)`
+export const ProfileImage = styled.Image`
   width: 60px;
   height: 60px;
   border-radius: 40px;

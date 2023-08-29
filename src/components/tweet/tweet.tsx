@@ -1,7 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 import {FooterTweet} from '../footer-tweet/footer-tweet';
-import { Avatar, Container, Content, Footer, ImageContent, MainContainer, Name, Username } from './tweet.style';
+import { Container, Content, Footer, ImageContent, MainContainer, Name, Username } from './tweet.style';
+import { Avatar } from '../avatar/avatar';
 
 type TweetProps = {
     id: string;
@@ -19,10 +20,13 @@ export const Tweet = (props: TweetProps) => {
     return (
       <Container>
         <View style={{flexDirection: 'row', gap: 20}}>
-          <Avatar source={{uri: 'https://pbs.twimg.com/profile_images/1695191319096803328/LRSwLlVg_400x400.jpg'}} />
+          <Avatar size='card' url={props.image ? props.image : ''} />
           <View style={{ flexDirection: 'row', paddingTop: 5 }}>
               <Name>{props.name}</Name>
-              <Username>{props.username} · 2h</Username>
+              <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+                <Username>{props.username} </Username>
+                <Username>·  {props.createdAt}</Username>
+              </View>
             </View>
           </View>
           <MainContainer>

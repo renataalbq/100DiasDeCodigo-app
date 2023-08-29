@@ -1,36 +1,74 @@
-import React from 'react';
-import { FlatList } from 'react-native';
+import React, {useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList } from 'react-native';
 import {Tweet} from '../../components/tweet/tweet';
 import { Header } from '../../components/header/header';
-import { Container } from './timeline.style';
-
-export const mockData = [
-    {id: '1', name: 'Renata', username: 'renatinhadev', content: 'tessste', createdAt: '01/02', image: 'https://img.freepik.com/fotos-gratis/computador-laptop-cinza-ligado_400718-47.jpg?w=826&t=st=1693150565~exp=1693151165~hmac=5f0b2d43a5d920de8600131b386d4385f1c0a52ff2699dfddf4260bf7b3d3dc8', numberOfComments: 2, numberOfRetweets: 2, numberOfLikes: 2, impressions: 2},
-    {id: '2', name: 'Renata', username: 'renatinhadev', content: 'Lorem ipsum dolor sit amet', createdAt: '01/02', numberOfComments: 2, numberOfRetweets: 2, numberOfLikes: 2, impressions: 2},
-    {id: '3', name: 'Renata', username: 'renatinhadev', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia cursus elit, ', createdAt: '01/02', numberOfComments: 2, numberOfRetweets: 2, numberOfLikes: 2, impressions: 2},
-    {id: '4', name: 'Renata', username: 'renatinhadev', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia cursus elit, ', createdAt: '01/02', numberOfComments: 2, numberOfRetweets: 2, numberOfLikes: 2, impressions: 2},
-    {id: '5', name: 'Renata', username: 'renatinhadev', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia cursus elit, ', createdAt: '01/02', numberOfComments: 2, numberOfRetweets: 2, numberOfLikes: 2, impressions: 2},
-{id: '6', name: 'Renata', username: 'renatinhadev', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia cursus elit, ', createdAt: '01/02', numberOfComments: 2, numberOfRetweets: 2, numberOfLikes: 2, impressions: 2},
-    {id: '7', name: 'Renata', username: 'renatinhadev', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia cursus elit, ', createdAt: '01/02', numberOfComments: 2, numberOfRetweets: 2, numberOfLikes: 2, impressions: 2},
-    {id: '8', name: 'Renata', username: 'renatinhadev', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia cursus elit, ', createdAt: '01/02', numberOfComments: 2, numberOfRetweets: 2, numberOfLikes: 2, impressions: 2},
-]
+import { BASE_URL } from '../../services/api';
+import { Background } from '../../components/background/background';
 
 export const Timeline = () => {
+    const [tweets, setTweets] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
+
+    const fetchTweets = async (page = 1) => {
+        try {
+          const response = await fetch(`${BASE_URL}/timeline?page=${page}`);
+          const data = await response.json();
+          return data.data;
+        } catch (error) {
+          setIsError(true);
+        }
+      };
+
+      
+  useEffect(() => {
+    const getTweets = async () => {
+      try {
+        const data = await fetchTweets();
+        setTweets(data);
+        setIsLoading(false);
+      } catch (error) {
+        setIsError(true);
+        setIsLoading(false);
+      }
+    };
+
+    getTweets();
+  }, []);
+
+  
+  const formatTimeAgo = (timestamp) => {
+    const now = new Date();
+    const tweetedAt = new Date(timestamp);
+    const timeDiff = now - tweetedAt;
+    const hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
+    const minutesDiff = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+
+    if (hoursDiff > 0 && minutesDiff !== 0) {
+      return `${hoursDiff}h ${minutesDiff}min`;
+    } else {
+      return `${minutesDiff}min`;
+    }
+  };
+
+  if (isLoading) {
+    return <ActivityIndicator />; //TODO SKELETON
+  }
     return (
-    <Container>
+    <Background>
         <Header />
-        <FlatList data={mockData} renderItem={({ item }) => 
-        <Tweet 
-            id={item.id}
-            content={item.content}
-            createdAt={item.createdAt}
-            image={item.image}
-            name={item.name} 
-            username={item.username}
-            replies_count={item.numberOfComments}
-            likes_count={item.numberOfLikes}
-            views_count={item.impressions} 
-        />} />
-      </Container>
+        <FlatList data={tweets} renderItem={({ item }) => 
+          <Tweet 
+              id={item.id}
+              content={item.content}
+              createdAt={formatTimeAgo(item.tweeted_at)}
+              image={item.user.profile_avatar_url}
+              name={item.user.name} 
+              username={item.user.username}
+              replies_count={item.replies_count}
+              likes_count={item.likes_count}
+              views_count={item.impressions} 
+          />} />
+      </Background>
     );
 }

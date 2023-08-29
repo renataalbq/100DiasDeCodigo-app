@@ -5,14 +5,15 @@ export const Container = styled.View`
     border-radius: 6px;
     padding: 10px;
     border-bottom-width: 1px;
-    background-color: rgba(21, 21, 21, 0.85);
-    margin-left: 10px;
+    background-color: rgba(21, 21, 21, 0.8);
     margin-bottom: 10px;
+    align-self: center;
+    justify-content: center;
 `;
 
 export const MainContainer = styled.View`
-    margin-left: 60px;
-    margin-right: 20px;
+    padding-left: 60px;
+    padding-right: 20px;
 `;
 
 export const Name = styled.Text`
@@ -27,6 +28,7 @@ export const Username = styled.Text`
 
 export const Content = styled.Text`
     color: #FFF;
+    line-height: 20px;
 `;
 
 export const ImageContent = styled.Image`
