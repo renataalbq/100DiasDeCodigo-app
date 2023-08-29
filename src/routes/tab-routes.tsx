@@ -15,8 +15,7 @@ export function TabRoutes() {
         tabBarActiveTintColor: 'white',
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
-          backgroundColor: '#0f0f16',
-          marginBottom: 5
+          backgroundColor: '#01010a'
         },
         unmountOnBlur: true,
       }}

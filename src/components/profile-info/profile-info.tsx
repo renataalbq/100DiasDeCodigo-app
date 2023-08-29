@@ -6,6 +6,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import { ProfileImage } from '../../screens/profile/profile.style';
 import { Badge } from '../badge/badge';
 import { ProgressBar } from '../progress-bar/progress-bar';
+import { useNavigation } from '@react-navigation/native';
+import { Avatar } from '../avatar/avatar';
+import Button from '../button/button';
 
 interface ProfileInfoProps {
   profilePicture: string;
@@ -21,7 +24,8 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
   const [openInput, setOpenInput] = React.useState(false);
   const [newTag, setNewTag] = React.useState('');
   const [tags, setTags] = React.useState(['frontend', 'mobile']);
-
+  const navigation = useNavigation();
+  
   const onAddTag = () => {
       setOpenInput(true)
   }
@@ -42,13 +46,13 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
   return (
     <View style={{backgroundColor: '#0d0d0df8'}}>
       <ContainerRow style={{ marginHorizontal: 10}}>
-        <ProfileImage
-          source={{ uri: props.profilePicture }}
-          style={{ marginTop: 10}}
-        />
-
+        <View style={{ marginTop: 10}}>
+          <Avatar url={props.profilePicture} size={'profile'} />
+        </View>
         <View style={{marginLeft: 20}}>
-          <Name>{props.name}</Name>
+          <View style={{flexDirection: 'row', gap: 200}}>
+            <Name>{props.name}</Name>
+          </View>
           <Username>@{props.username}</Username>
         </View>
       </ContainerRow>
@@ -66,22 +70,15 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
             <Badge text={newTag} onRemove={() => setNewTag('')} />
           )}
           </View>
-         {!openInput ? (
-            <TouchableOpacity style={{padding: 12, 
-              width: '100%', 
-              marginTop: 20, 
-              borderRadius: 8, borderWidth: 1, 
-              borderColor: '#782BF1',
-              }} onPress={onAddTag}>
-              <WhiteText style={{textAlign: 'center', fontSize: 16,}}>Adicionar tag</WhiteText>
-            </TouchableOpacity>
-         ) : null}
-         
+          {!openInput ? (
+           <Button.PrimaryOutlined onTap={onAddTag} text='Adicionar tag'/>
+       ) : null}
+       
       </Container>
       {!openInput ? (
         <Container style={{ paddingHorizontal: 10, marginTop: 7,  marginHorizontal: 10}}>
           <View>
-            <View  style={{flexDirection: 'row', gap: 240}}>
+            <View  style={{flexDirection: 'row', gap: 230}}>
               <WhiteText style={{ marginTop: 15, marginBottom: 8, fontSize: 16, fontWeight: 'bold' }}>Progresso</WhiteText>
               <WhiteText style={{ marginTop: 15, marginBottom: 7, fontSize: 14}}>{props.currentDay}/100</WhiteText>
             </View>
@@ -98,7 +95,7 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
             </View>
             <View style={{flexDirection: 'row', gap: 10}}>
               <FontAwesome name="comments" size={16} color={'#b6b6b6'} />
-              <Text style={{ color: '#ffffff', marginBottom: 10, fontSize: 14}}>{props.numberOfComments}</Text>
+              <WhiteText style={{ marginBottom: 10, fontSize: 14}}>{props.numberOfComments}</WhiteText>
             </View>
           </View>
         </Container>
@@ -114,23 +111,13 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
                 placeholderTextColor={'rgba(134, 134, 134, 1)'}
                 style={{
                   color: 'white',
-                  borderWidth: 1,
                   borderRadius: 8,
                   padding: 10,
                   backgroundColor: '#292929fd'
                 }}
               />
-              <TouchableOpacity
-                onPress={onSaveTag}
-                style={{
-                  backgroundColor: '#782BF1',
-                  paddingVertical: 12,
-                  borderRadius: 8,
-                  marginVertical: 20,
-                }}
-              >
-                <WhiteText style={{ textAlign: 'center', fontSize: 16 }}>Salvar</WhiteText>
-              </TouchableOpacity>
+              <Button.Primary text='Salvar' onTap={onSaveTag} />
+
             </Container>
           </View>
         )}
