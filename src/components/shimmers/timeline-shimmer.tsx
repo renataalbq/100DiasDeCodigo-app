@@ -1,3 +1,4 @@
+import React from "react";
 import { Shimmer } from "./shimmer";
 
 interface TimelineShimmerProps {

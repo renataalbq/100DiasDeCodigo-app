@@ -1,3 +1,4 @@
+import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 
 export const BadgeStyled = styled.View`
@@ -14,3 +15,8 @@ export const BadgeText = styled.Text`
   font-size: 14px;
   font-weight: 700;
 `;
+
+export const DeleteButton = styled.TouchableOpacity`
+  margin-left: 10px;
+  margin-top: 2px;
+`

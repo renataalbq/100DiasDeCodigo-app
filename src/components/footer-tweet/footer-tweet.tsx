@@ -1,5 +1,6 @@
 import { EvilIcons } from '@expo/vector-icons';
 import { Container, FooterCounter } from './footer-tweet.style';
+import React from 'react';
 
 type FooterTweetProps = {
   icon: React.ComponentProps<typeof EvilIcons>['name'];

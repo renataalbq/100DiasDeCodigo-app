@@ -5,7 +5,7 @@ export const theme = {
       black: '#0D0D0D',
       black90: '#151515',
       black50: '#1E1E1E',
-      overlay: 'rgba(0,0,0,0.1)',
+      overlay: 'rgba(0,0,0,0.6)',
       highlight: '#DDDDDD',
       heading: '#FFFFFF',
       gray: '#C6C6C6',

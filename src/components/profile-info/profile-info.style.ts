@@ -1,13 +1,5 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-    flex: 1;
-`;
-
-export const WhiteText = styled.Text`
-  color:#fff;
-`;
-
 export const Name = styled.Text`
   font-size:  24px;
   font-weight: 700;
@@ -25,4 +17,15 @@ export const Username = styled.Text`
 export const ContainerRow = styled.View`
   flex: 1;
   flex-direction: row;
+  margin-left: 10px;
+  margin-right: 10px;
+`
+
+export const AvatarWrapper = styled.View`
+  margin-top: 16px;
+  margin-left: 10px;
+`
+
+export const UserWrapper = styled.View`
+  margin-left: 20px;
 `
