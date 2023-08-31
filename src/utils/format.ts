@@ -1,13 +1,24 @@
+import {
+  differenceInHours,
+  differenceInMinutes,
+  differenceInDays
+} from 'date-fns';
+
+const MINUTES_IN_HOUR = 60;
+const HOURS_IN_A_DAY = 24;
+
 export const formatTimeAgo = (timestamp: string) => {
   const now = new Date();
   const tweetedAt = new Date(timestamp);
-  const timeDiff = now - tweetedAt;
-  const hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
-  const minutesDiff = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
 
-  if (hoursDiff > 0 && minutesDiff !== 0) {
-    return `${hoursDiff}h ${minutesDiff}min`;
-  } else {
-    return `${minutesDiff}min`;
+  const hoursDiff = differenceInHours(now, tweetedAt);
+  const minutesDiff = differenceInMinutes(now, tweetedAt) % MINUTES_IN_HOUR;
+
+  if (hoursDiff > HOURS_IN_A_DAY) {
+    return `${differenceInDays(now, tweetedAt)}d`;
   }
+
+  return hoursDiff > 0 && minutesDiff !== 0
+    ? `${hoursDiff}h ${minutesDiff}min`
+    : `${minutesDiff}min`;
 };

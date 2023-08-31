@@ -1,11 +1,29 @@
 import styled from 'styled-components/native';
 
+type WhiteTextProps = {
+  mt?: number;
+  mb?: number;
+  fontSize: number;
+  paddingVertical?: number;
+  fontWeight?: boolean;
+};
+
 export const Container = styled.View`
-    flex: 1;
+  flex: 1;
 `;
 
-export const WhiteText = styled.Text`
-  color:#fff;
+export const Banner = styled.Image`
+  height: 100px;
+  width: 100%;
+`;
+
+export const WhiteText = styled.Text<WhiteTextProps>`
+  color: #fff;
+  font-size: ${({ fontSize }) => fontSize}px;
+  margin-top: ${({ mt }) => mt || 0}px;
+  margin-bottom: ${({ mb }) => mb || 0}px;
+  padding-vertical: ${({ paddingVertical }) => paddingVertical || 0}px;
+  font-weight: ${({ fontWeight }) => (fontWeight ? 'bold' : 'normal')};
 `;
 
 export const TweetsCount = styled.Text`
@@ -50,11 +68,6 @@ export const TweetsWrapper = styled.View`
   margin-left: 10px;
   margin-right: 10px;
 `
-
-export const ProfileBanner = styled.Image`
-  height: 100px; 
-  width: 100%;
-`;
 
 export const BadgeContainer = styled.View`
   margin-left: 10px;

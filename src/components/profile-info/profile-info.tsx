@@ -8,7 +8,7 @@ interface ProfileInfoProps {
   username: string;
 }
 
-export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
+const ProfileInfo: React.FC<ProfileInfoProps> = props => {
 
   return (
     <>
@@ -24,3 +24,5 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = props => {
     </>
     );
 }
+
+export default ProfileInfo;
