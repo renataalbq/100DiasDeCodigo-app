@@ -1,12 +1,11 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Timeline } from "../screens/timeline/timeline";
-import { Profile } from "../screens/profile/profile";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialIcons } from '@expo/vector-icons';
+import { Timeline } from 'screens/timeline/timeline';
+import { Profile } from 'screens/profile/profile';
 
 const Tab = createBottomTabNavigator();
 
 export function TabRoutes() {
-
   return (
     <Tab.Navigator
       screenOptions={{
@@ -15,26 +14,26 @@ export function TabRoutes() {
         tabBarActiveTintColor: 'white',
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
-          backgroundColor: '#01010a',
-        },
+          backgroundColor: '#01010a'
+        }
       }}
     >
       <Tab.Screen
-        name="Home"
+        name='Home'
         component={Timeline}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="home" size={size} color={color} />
-          ),
+            <MaterialIcons name='home' size={size} color={color} />
+          )
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name='Profile'
         component={Profile}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="person" size={size} color={color} />
-          ),
+            <MaterialIcons name='person' size={size} color={color} />
+          )
         }}
       />
     </Tab.Navigator>

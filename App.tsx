@@ -1,5 +1,4 @@
 import { StatusBar } from 'expo-status-bar';
-import { Routes } from './src/routes';
 import {
   useFonts,
   DMSans_400Regular,
@@ -8,7 +7,8 @@ import {
 } from '@expo-google-fonts/dm-sans';
 import { View } from 'react-native';
 import { ThemeProvider } from 'styled-components';
-import { theme } from './src/theme/theme';
+import { theme } from 'theme/theme';
+import { Routes } from 'routes';
 
 export default function App() {
   const [fontsLoaded, error] = useFonts({

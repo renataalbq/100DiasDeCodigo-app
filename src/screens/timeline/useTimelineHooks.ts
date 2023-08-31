@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BASE_URL } from '../../services/api';
+import { BASE_URL } from 'services/api';
 
 export default () => {
   const [tweets, setTweets] = useState<Array<Object>>([]);

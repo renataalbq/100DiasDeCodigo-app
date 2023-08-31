@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
-import { Tweet } from '../../components/tweet/tweet';
+
+import Tweet from 'components/tweet';
+import ProfileInfo from 'components/profile-info';
+import Background from 'components/background';
+
+import { mockData } from 'services/mock-data';
+import { PROFILE_BANNER, PROFILE_PICTURE } from 'utils/constants';
 import { Banner, Container, ProfileContent, WhiteText } from './profile.style';
-import { ProfileInfo } from '../../components/profile-info/profile-info';
-import { mockData } from '../../services/mock-data';
-import { Background } from '../../components/background/background';
-import { PROFILE_BANNER, PROFILE_PICTURE } from '../../utils/constants';
 
 export const Profile = () => {
   const [progress, setProgress] = useState(20);
@@ -32,7 +34,7 @@ export const Profile = () => {
               </WhiteText>
 
               {mockData.map(item => (
-                <Tweet {...item} />
+                <Tweet {...item} key={item.id.toString()} />
               ))}
             </ProfileContent>
           </Background>

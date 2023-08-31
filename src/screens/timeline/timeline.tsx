@@ -1,11 +1,11 @@
 import React from 'react';
-import { Tweet } from '../../components/tweet/tweet';
-import { Header } from '../../components/header/header';
-import { Background } from '../../components/background/background';
-import { List } from './timeline.style';
-import { TimelineShimmer } from '../../components/shimmers/timeline-shimmer';
-import { TweetProps } from '../../types/TweetProps';
+import Background from 'components/background';
+import Tweet from 'components/tweet';
+import Header from 'components/header';
+import { TweetProps } from 'types/TweetProps';
 import useTimelineHooks from './useTimelineHooks';
+import { List } from './timeline.style';
+import { TimelineShimmer } from 'components/shimmers';
 
 export const Timeline = () => {
   const { loading, loadMoreTweets, tweets } = useTimelineHooks();
