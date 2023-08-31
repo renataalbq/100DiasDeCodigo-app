@@ -14,7 +14,7 @@ import { Avatar } from '../avatar/avatar';
 import { formatTimeAgo } from '../../utils/format';
 import { TweetProps } from '../../types/TweetProps';
 
-export const Tweet = ({
+const Tweet = ({
   id,
   content,
   tweeted_at,
@@ -57,3 +57,5 @@ export const Tweet = ({
     </Container>
   );
 };
+
+export default Tweet;
