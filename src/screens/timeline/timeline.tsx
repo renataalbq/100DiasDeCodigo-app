@@ -9,11 +9,10 @@ import { TimelineShimmer } from 'components/shimmers';
 
 export const Timeline = () => {
   const { loading, loadMoreTweets, tweets } = useTimelineHooks();
-
   return (
     <Background>
       <Header />
-      {!loading ? (
+      {!loading && tweets !== undefined ? (
         <List
           data={tweets}
           renderItem={({ item }: { item: TweetProps }) => <Tweet {...item} />}
