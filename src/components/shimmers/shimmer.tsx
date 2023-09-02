@@ -12,9 +12,9 @@ interface Props {
 
 const Shimmer = ({ children, isLoading, style }: Props) => (
   <ShimmerPlaceholder
-    shimmerColors={['#2323237e']}
+    shimmerColors={['#1f1f1f', '#232323' ]}
     visible={!isLoading}
-    shimmerStyle={[style, { borderRadius: 8 }]}
+    shimmerStyle={[style]}
   >
     {children}
   </ShimmerPlaceholder>

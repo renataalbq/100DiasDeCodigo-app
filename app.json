@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "100DiasDeCodigo",
+    "name": "100 Dias De Código",
     "slug": "100-dias-de-codigo",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -24,6 +26,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a432bd5d-0a82-4336-a4a0-51320e12faf5"
+      }
     }
   }
 }
