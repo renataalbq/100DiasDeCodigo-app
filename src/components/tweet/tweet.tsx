@@ -1,5 +1,5 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState }  from 'react';
+import { Modal, Image, View, TouchableOpacity, Text } from 'react-native';
 import { FooterTweet } from '../footer-tweet/footer-tweet';
 import {
   Container,
@@ -13,17 +13,72 @@ import {
 import { Avatar } from '../avatar/avatar';
 import { formatTimeAgo } from '../../utils/format';
 import { TweetProps } from '../../types/TweetProps';
+import { Video, ResizeMode } from 'expo-av';
+import { EvilIcons } from '@expo/vector-icons';
 
 const Tweet = ({
   id,
   content,
   tweeted_at,
-  image,
+  medias,
   replies_count,
   likes_count,
-  impressions,
+  views_count,
   user
 }: TweetProps) => {
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedMedia, setSelectedMedia] = useState(null);
+
+  const handleImageClick = (media) => {
+    setSelectedMedia(media);
+    setIsModalVisible(true);
+  };
+
+  const renderMedia = () => {
+    if (!selectedMedia) return null;
+    const { media_type, payload } = selectedMedia;
+
+    if (media_type === 'photo') {
+        return (
+          <Image
+            source={{ uri:  selectedMedia.thumbnail}}
+            style={{ width: 300, height: 400,}}
+            resizeMode="contain"
+          />
+        );
+    } else if (media_type === 'video') {
+      const videoMedia = payload.variants && payload.variants[0].url
+        ? payload.variants[0].url
+        : null;
+
+      if (videoMedia) {
+        return (
+          <>
+          <Video
+            ref={video}
+            style={{width: 300, height: 400}}
+            source={{
+              uri: videoMedia,
+            }}
+            useNativeControls
+            resizeMode={ResizeMode.CONTAIN}
+            isLooping
+            onPlaybackStatusUpdate={status => setStatus(() => status)}
+          />
+
+        </>
+          
+        );
+      } else {
+          return <Text>Vídeo não disponível.</Text>;
+      }
+    }
+
+    return null;
+  };
+  
   return (
     <Container>
       <View style={{ flexDirection: 'row', gap: 17 }}>
@@ -43,17 +98,37 @@ const Tweet = ({
       </View>
       <MainContainer>
         <Content>{content}</Content>
-        {image && <ImageContent source={{ uri: image }} />}
+        {!!medias && medias.length > 0 && medias.map(media => (
+             <TouchableOpacity key={media.id} onPress={() => handleImageClick(media)}>
+              <ImageContent key={media.id} source={{ uri: media.thumbnail }} />
+            </TouchableOpacity>
+          ))}
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <Footer>
             <FooterTweet icon='comment' text={replies_count} />
             <FooterTweet icon='heart' text={likes_count} />
           </Footer>
           <View style={{ paddingTop: 14 }}>
-            <FooterTweet icon='chart' text={impressions || 0} />
+            <FooterTweet icon='chart' text={views_count} />
           </View>
         </View>
       </MainContainer>
+      <Modal visible={isModalVisible} transparent={true} animationType="slide">
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <View style={{ backgroundColor: '#070202', padding: 20, borderRadius: 10 }}>
+            <TouchableOpacity
+              style={{ position: 'absolute', top: 10, right: 10 }}
+              onPress={() => {
+                setIsModalVisible(false);
+                setSelectedMedia(null);
+              }}
+            >
+              <EvilIcons name={'close'} size={24} color="white" />
+            </TouchableOpacity>
+            {renderMedia()}
+          </View>
+        </View>
+      </Modal>
     </Container>
   );
 };
