@@ -33,9 +33,9 @@ export const Content = styled.Text`
 
 export const ImageContent = styled.Image`
     width: 100%;
-    margin-left: 10px;
-    margin-right: 10px;
+    height: 120px;
     border-radius: 15px;
+    margin-top: 10px;
 `;
 
 export const Footer = styled.View`
