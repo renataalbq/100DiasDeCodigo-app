@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { BASE_URL } from 'services/api';
 
 export default () => {
   const [tweets, setTweets] = useState<Array<Object>>([]);
@@ -7,9 +6,11 @@ export default () => {
   const [error, setError] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
+  const apiUrl = process.env.BASE_URL;
+
   const fetchTweets = async (page = 1) => {
     try {
-      const response = await fetch(`${BASE_URL}/timeline?page=${page}`);
+      const response = await fetch(`${apiUrl}/timeline?page=${page}`);
       const data = await response.json();
       return data.data;
     } catch (error) {
