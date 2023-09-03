@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "100 Dias De Código",
-    "slug": "100-dias-de-codigo",
+    "slug": "cemdiasdecodigo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,6 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
+    "scheme": "cemdiasdecodigo",
     "assetBundlePatterns": [
       "**/*"
     ],
