@@ -12,9 +12,7 @@
       "backgroundColor": "#000000"
     },
     "scheme": "cemdiasdecodigo",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["*/"],
     "ios": {
       "supportsTablet": true
     },
