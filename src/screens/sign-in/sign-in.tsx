@@ -1,9 +1,8 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import Button from 'components/button/button';
 import { View } from 'react-native';
-import * as AuthSession from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
+import { useAuthRequest } from 'expo-auth-session';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -24,7 +23,7 @@ const twitterUrl = {
 };
 
 export const SignIn = () => {
-  const [request, response, promptAsync] = AuthSession.useAuthRequest(
+  const [request, response, promptAsync] = useAuthRequest(
     {
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
