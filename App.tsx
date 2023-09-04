@@ -9,6 +9,7 @@ import { View } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'theme/theme';
 import { Routes } from 'routes';
+import React from 'react';
 
 export default function App() {
   const [fontsLoaded, error] = useFonts({

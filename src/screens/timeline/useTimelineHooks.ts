@@ -6,11 +6,16 @@ export default () => {
   const [error, setError] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const apiUrl = process.env.BASE_URL;
+  const BASE_URL = process.env.EXPO_PUBLIC_BASE_URL;
+
+  if (!BASE_URL) {
+    throw new Error('EXPO_PUBLIC_CLIENT_ID is required');
+  }
+
 
   const fetchTweets = async (page = 1) => {
     try {
-      const response = await fetch(`${apiUrl}/timeline?page=${page}`);
+      const response = await fetch(`${BASE_URL}/timeline?page=${page}`);
       const data = await response.json();
       return data.data;
     } catch (error) {

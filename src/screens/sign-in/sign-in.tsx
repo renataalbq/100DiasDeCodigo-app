@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from 'components/button/button';
 import { View } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { useAuthRequest } from 'expo-auth-session';
+import { useNavigation } from '@react-navigation/native';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -23,6 +24,7 @@ const twitterUrl = {
 };
 
 export const SignIn = () => {
+  const navigation = useNavigation();
   const [request, response, promptAsync] = useAuthRequest(
     {
       clientId: CLIENT_ID,
@@ -34,8 +36,16 @@ export const SignIn = () => {
     twitterUrl,
   );
 
+  
+  useEffect(() => {
+    if (response?.type === 'success') {
+      const { code } = response.params;
+    }
+  }, [response]);
+
   const handleSignIn = () => {
     promptAsync();
+    navigation.navigate('Timeline')
   };
 
   return (
