@@ -3,3 +3,9 @@ export const PROFILE_PICTURE =
 
 export const PROFILE_BANNER =
   'https://img.freepik.com/fotos-gratis/computador-laptop-cinza-ligado_400718-47.jpg?w=1060&t=st=1693176021~exp=1693176621~hmac=4e8b6aed5e1145dc34addabc050ff6236ab0ba7b8a9c3fe087707f0193c1a6ad';
+
+export const twitterUrl = {
+  authorizationEndpoint: 'https://twitter.com/i/oauth2/authorize',
+  tokenEndpoint: 'https://twitter.com/i/oauth2/token',
+  revocationEndpoint: 'https://twitter.com/i/oauth2/revoke'
+};
