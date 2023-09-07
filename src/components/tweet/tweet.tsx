@@ -14,7 +14,7 @@ import { Avatar } from '../avatar/avatar';
 import { formatTimeAgo } from '../../utils/format';
 import { TweetProps } from '../../types/TweetProps';
 import { Video, ResizeMode } from 'expo-av';
-import { EvilIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 const Tweet = ({
   id,
@@ -44,7 +44,7 @@ const Tweet = ({
         return (
           <Image
             source={{ uri:  selectedMedia.thumbnail}}
-            style={{ width: 300, height: 400,}}
+            style={{ width: 360, height: '100%'}}
             resizeMode="contain"
           />
         );
@@ -58,7 +58,7 @@ const Tweet = ({
           <>
           <Video
             ref={video}
-            style={{width: 300, height: 400}}
+            style={{width: 360, height: '100%'}}
             source={{
               uri: videoMedia,
             }}
@@ -117,13 +117,13 @@ const Tweet = ({
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <View style={{ backgroundColor: '#070202', padding: 20, borderRadius: 10 }}>
             <TouchableOpacity
-              style={{ position: 'absolute', top: 10, right: 10 }}
+              style={{ position: 'absolute', top: 10, padding: 10, right: 18}}
               onPress={() => {
                 setIsModalVisible(false);
                 setSelectedMedia(null);
               }}
             >
-              <EvilIcons name={'close'} size={24} color="white" />
+              <Ionicons name={'close'} size={28} color="white" />
             </TouchableOpacity>
             {renderMedia()}
           </View>

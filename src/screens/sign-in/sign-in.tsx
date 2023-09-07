@@ -13,11 +13,6 @@ WebBrowser.maybeCompleteAuthSession();
 export const SignIn = () => {
   const { signIn, request } = useSignInHooks();
   const { overlay } = theme.colors;
-  const navigation = useNavigation();
-
-  const handleSignIn = () => {
-    navigation.navigate('Timeline');
-  }
 
   return (
     <Background>
@@ -27,16 +22,14 @@ export const SignIn = () => {
           resizeMode="stretch"
         />
         <Content>
-          <Title>
-           Acompanhe seu progresso no desafio
-          </Title>
+          <Title>Acompanhe seu progresso no desafio</Title>
           <TitleSecondary>{'#100DiasDeCódigo'}</TitleSecondary>
 
           <Button.Primary
             loading={!request}
             text='Entrar com o twitter'
-            onTap={handleSignIn}
-            />                       
+            onTap={signIn}
+          /> 
         </Content>
       </Container>
     </Background>

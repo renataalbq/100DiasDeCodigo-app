@@ -19,7 +19,7 @@ export const Content = styled.View`
 export const Title = styled.Text`
     color: #fff;
     text-align: center;
-    font-size: 36px;
+    font-size: 34px;
     font-weight: 700;
     line-height: 45px;
 `;
@@ -29,7 +29,7 @@ export const TitleSecondary = styled.Text`
     text-align: center;
     font-size: 30px;
     margin-bottom: 30px;
-    margin-top: 20px;
+    margin-top: 14px;
     font-weight: 700;
 `;
 

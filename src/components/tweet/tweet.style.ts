@@ -33,7 +33,7 @@ export const Content = styled.Text`
 
 export const ImageContent = styled.Image`
     width: 100%;
-    height: 120px;
+    height: 160px;
     border-radius: 15px;
     margin-top: 10px;
 `;

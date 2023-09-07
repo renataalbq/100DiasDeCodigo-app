@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-    flex-direction: row;
     padding-top: 35px;
     background-color: #01010a;
     border-bottom-color: #727272;
@@ -18,3 +17,10 @@ export const Title = styled.Text`
   padding-top: 10px;
   text-align: center;
 `;
+
+export const SocialIconsWrapper = styled.View`
+  flex-direction: row; 
+  justify-content: center; 
+  gap: 30px; 
+  margin-top: 10px;
+`
