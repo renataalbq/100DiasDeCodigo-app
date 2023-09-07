@@ -1,84 +1,68 @@
-import React, { createContext, useContext, useState, ReactNode, useEffect,} from 'react';
-import * as AuthSession from 'expo-auth-session';
-
-const api = '';
-
-type User = {
-  id: string;
-  username: string;
-  name: string;
-  avatar: string;
-  token: string;
-}
+import { useAuthRequest } from 'expo-auth-session';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { twitterUrl } from 'utils/constants';
 
 type AuthContextData = {
   user: User;
-  loading: boolean;
-  signIn: () => Promise<void>;
-  signOut: () => Promise<void>;
+  request: any;
+  signIn: () => void;
+  signOut: () => void;
+};
+
+type User = {
+  token: string;
+};
+
+const AuthContext = createContext({} as AuthContextData);
+
+const CLIENT_ID = process.env.EXPO_PUBLIC_CLIENT_ID;
+if (!CLIENT_ID) {
+  throw new Error('EXPO_PUBLIC_CLIENT_ID is required');
 }
 
-type AuthProviderProps = {
-  children: ReactNode;
+const CLIENT_SECRET = process.env.EXPO_PUBLIC_CLIENT_SECRET;
+if (!CLIENT_SECRET) {
+  throw new Error('EXPO_PUBLIC_CLIENT_SECRET is required');
 }
 
-type AuthorizationResponse = AuthSession.AuthSessionResult & {
-  params: {
-    access_token?: string;
-    error?: string;
-  }
-}
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState<User>(null);
 
-export const AuthContext = createContext({} as AuthContextData);
+  const [request, response, promptAsync] = useAuthRequest(
+    {
+      clientId: CLIENT_ID,
+      clientSecret: CLIENT_SECRET,
+      redirectUri: 'cemdiasdecodigo://',
+      usePKCE: true,
+      scopes: ['tweet.read', 'offline.access', 'like.read', 'users.read']
+    },
+    twitterUrl
+  );
 
-function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<User>({} as User);
-  const [loading, setLoading] = useState(false);
+  const signIn = () => {
+    promptAsync();
+  };
 
-  const signIn = async () => {
-    try {
-      setLoading(true);
+  const signOut = () => {};
 
-      const authUrl = ''; 
-
-      setUser({
-        id: '1',
-        username: 'renatinhadev',
-        name: 'renatinha',
-        avatar: '',
-        token: ''
-      });
-
-    } catch {
-      throw new Error('Não foi possível autenticar');
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    if (response?.type === 'success') {
+      const { code } = response.params;
+      updateUserValue({ token: code });
     }
-  }
+  }, [response]);
 
-  const signOut = async () => {
-    setUser({} as User);
-  }
+  const updateUserValue = (user: User) => {
+    setUser(user);
+  };
 
   return (
-    <AuthContext.Provider value={{
-      user,
-      loading,
-      signIn,
-      signOut
-    }}>
-      { children }
+    <AuthContext.Provider value={{ user, signIn, signOut, request }}>
+      {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
 
-const useAuth = () => {
-  const context = useContext(AuthContext);
-
-  return context;
-}
-
-export {
-  AuthProvider,
-  useAuth
-}
+export const useAuth = () => {
+  return useContext(AuthContext);
+};

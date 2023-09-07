@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import { theme } from './../../theme/theme';
 import styled from 'styled-components/native';
 
@@ -10,34 +11,39 @@ interface ButtonStyledProps {
   loading: boolean;
 }
 
-type ButtonVariantType = 'primary' ;
+type ButtonVariantType = 'primary';
 
 interface ButtonVariantProps {
-    textColor: string;
-    bgColor: string;
+  textColor: string;
+  bgColor: string;
 }
-  
+
 type ButtonVariantConfigProps = ButtonVariantType;
 
-const ButtonVariantConfig: (props: any) => Record<ButtonVariantConfigProps, ButtonVariantProps> = theme => ({
+const ButtonVariantConfig: (
+  props: any
+) => Record<ButtonVariantConfigProps, ButtonVariantProps> = theme => ({
   primary: {
     textColor: '#DDDDDD',
-    bgColor: '#782BF1',
-  },
+    bgColor: '#782BF1'
+  }
 });
 
 export const ButtonStyled = styled.View<ButtonStyledProps>`
   opacity: ${props => (props.loading ? 0.5 : 1)};
   justify-content: center;
   align-items: center;
-  align-self: 'stretch';
+  align-self: ${Platform.OS === 'android' ? 'stretch' : 'center'};
   padding: 0;
   margin-top: 20px;
   margin-bottom: 20px;
 `;
 
-export const ButtonTouchableOpacityStyled = styled.TouchableOpacity.attrs(({ theme }) => ({
-  activeOpacity: theme.opacity?.active}))<ButtonColorProps >`
+export const ButtonTouchableOpacityStyled = styled.TouchableOpacity.attrs(
+  ({ theme }) => ({
+    activeOpacity: theme.opacity?.active
+  })
+)<ButtonColorProps>`
   background-color: ${props =>
     props.outlined
       ? 'transparent'
@@ -57,7 +63,8 @@ export const ButtonTouchableOpacityStyled = styled.TouchableOpacity.attrs(({ the
 `;
 
 export const ButtonTextStyled = styled.Text<ButtonColorProps>`
-  color: ${props => ButtonVariantConfig(props?.theme.colors)[props.variant].textColor};
+  color: ${props =>
+    ButtonVariantConfig(props?.theme.colors)[props.variant].textColor};
   text-align: center;
   font-weight: bold;
   font-size: 16px;
