@@ -12,9 +12,7 @@ const Background = ({ children }: BackgroundProps) => {
 
   return (
     <LinearContainer colors={[black, primary]}>
-      <View style={{ backgroundColor: overlay}}>
         {children}
-      </View>
     </LinearContainer>
   );
 };

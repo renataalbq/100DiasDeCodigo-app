@@ -11,12 +11,14 @@ import { ProgressBar } from '../../components/progress-bar/progress-bar';
 import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { PROFILE_BANNER, PROFILE_PICTURE } from 'utils/constants';
+import { theme } from 'theme/theme';
 
 export const Profile = () => {
   const [progress, setProgress] = useState(20);
   const [openInput, setOpenInput] = React.useState(false);
   const [newTag, setNewTag] = React.useState('');
   const [tags, setTags] = React.useState(['frontend', 'mobile']);
+  const { overlay } = theme.colors;
 
   const onAddTag = () => {
     setOpenInput(true)
@@ -37,7 +39,7 @@ const onRemoveTag = (tagToRemove: string) => {
   return (
     <Container>
       <Background>
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: overlay}}>
         <Banner source={{ uri: PROFILE_BANNER }} />
         <Container>
           <View style={{backgroundColor: '#0d0d0ddd', paddingBottom: 20, borderBottomLeftRadius: 20, borderBottomRightRadius: 20}}>
