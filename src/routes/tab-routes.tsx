@@ -1,7 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Timeline } from 'screens/timeline/timeline';
 import { Profile } from 'screens/profile/profile';
+import { Ranking } from 'screens/ranking/ranking';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,6 +25,15 @@ export function TabRoutes() {
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name='home' size={size} color={color} />
+          )
+        }}
+      />
+      <Tab.Screen
+        name='Ranking'
+        component={Ranking}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="podium" size={size} color={color} />
           )
         }}
       />
